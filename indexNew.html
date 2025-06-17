@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can Riera – Casa Rústica en Porto Cristo</title>
+  <style>
+    body { font-family: sans-serif; margin:0;padding:0;color:#333; }
+    nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+    header {
+      background-image: url('img/background/1.jpeg');
+      display:flex; align-items:center; justify-content:center;
+      height:80vh; background-size:cover; background-position:center;
+      color:white; text-shadow:0 2px 4px rgba(0,0,0,0.6); text-align:center;
+      position: relative;
+      transition: background-image 1s ease-in-out;
+    }
+    header h1 { font-size:2.8em; margin:0 0 1em 0; }
+    header h2 { font-weight: normal; font-size: 1.2em; margin-top: 0.5em; }
+    .btn { background:#027acc; color:white; padding:1em 2em; text-decoration:none; border-radius:5px; display:inline-block; }
+    .section { padding:2em 1em; max-width:900px; margin:auto; }
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1em; }
+    .gallery img { width:100%; border-radius:8px; cursor: pointer; }
+    .tourism ul { list-style:none; padding:0; }
+    .tourism li { margin:.5em 0; }
+    footer { text-align:center; padding:1.5em; background:#f0f0f0; color:#666; }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://airbnb.com/h/canriera" class="btn" target="_blank">Ver en Airbnb</a>
+  </nav>
+
+  <header>
+    <div>
+      <h1>Can Riera – Casa en Cala Anguila</h1>
+      <h2>Casa familiar cerca de Porto Cristo, ideal para familias y mascotas.</h2>
+    </div>
+    <script>
+      const images = [
+        "img/background/1.jpeg",
+        "img/background/2.jpeg",
+        "img/background/3.jpeg",
+        "img/background/4.jpeg",
+        "img/background/5.jpeg"
+      ];
+      let current = 0;
+      const header = document.querySelector("header");
+      header.style.backgroundImage = `url('${images[0]}')`;
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+      setInterval(() => {
+        current = (current + 1) % images.length;
+        header.style.backgroundImage = `url('${images[current]}')`;
+      }, 5000);
+    </script>
+  </header>
+
+  <section class="section">
+    <h2>Sobre la casa</h2>
+    <p>Can Riera es una casa unifamiliar de unos ~130 m², con vistas al mar y a solo 3 min a pie de las calas Cala Anguila y Cala Mendia. Situada en una zona residencial tranquila y familiar, es perfecta para desconectar con toda la familia (incluidas mascotas).</p>
+  </section>
+
+  <section class="section">
+    <h2>Galería</h2>
+    <div class="gallery">
+      <img src="img/terraza.jpeg" alt="Terraza de la casa">
+      <img src="img/salon.jpeg" alt="Salón con decoración mediterránea">
+      <img src="img/habitacion.jpeg" alt="Habitación principal">
+      <img src="img/cala.jpeg" alt="Cala cercana">
+    </div>
+  </section>
+
+  <section class="section tourism">
+    <h2>Entorno y actividades</h2>
+    <ul>
+      <li>🏖️ A 3 min a pie de las calas Cala Anguila y Cala Mendia</li>
+      <li>📍 A 2 km de Porto Cristo (restaurantes, puerto deportivo)</li>
+      <li>🌊 Cuevas del Drach y las Hams a pocos minutos en coche</li>
+      <li>🌅 Paseos tranquilos, opciones de kayak y paddle–surf</li>
+    </ul>
+  </section>
+
+  <footer>&copy; 2025 Can Riera – Porto Cristo, Mallorca</footer>
+
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Vista ampliada">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.lightbox .close');
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
